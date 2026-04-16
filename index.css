@@ -1,0 +1,77 @@
+:root {
+    --bg-color-1: #020617; /* Very dark slate */
+    --bg-color-2: #172554; /* Deep modern blue */
+    --text-glow: rgba(59, 130, 246, 0.5); /* Blue glow */
+    --card-bg: rgba(255, 255, 255, 0.05); /* slightly transparent */
+    --card-border: rgba(59, 130, 246, 0.2);
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Outfit', sans-serif;
+    background: linear-gradient(135deg, var(--bg-color-1), var(--bg-color-2));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.container {
+    padding: 4rem 6rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 32px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(59, 130, 246, 0.1);
+    opacity: 0;
+    animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    cursor: default;
+}
+
+.container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 35px 60px -15px rgba(59, 130, 246, 0.4), inset 0 0 30px rgba(59, 130, 246, 0.2);
+}
+
+.idea-text {
+    margin: 0;
+    font-size: 7rem; /* Make the font size huge */
+    font-weight: 700;
+    color: transparent;
+    /* Blue gradient */
+    background-image: linear-gradient(to right, #60a5fa, #3b82f6, #38bdf8);
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-size: 200% auto;
+    text-align: center;
+    filter: drop-shadow(0px 0px 20px var(--text-glow));
+    animation: textShine 4s linear infinite, float 6s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes fadeUp {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes textShine {
+    to {
+        background-position: 200% center;
+    }
+}
