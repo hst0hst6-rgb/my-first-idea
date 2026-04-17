@@ -1,9 +1,12 @@
 :root {
-    --bg-color-1: #020617; /* Very dark slate */
-    --bg-color-2: #172554; /* Deep modern blue */
-    --text-glow: rgba(59, 130, 246, 0.5); /* Blue glow */
-    --card-bg: rgba(255, 255, 255, 0.05); /* slightly transparent */
-    --card-border: rgba(59, 130, 246, 0.2);
+    --bg-color-1: #f8fafc; /* Very light slate */
+    --bg-color-2: #e2e8f0; /* Light slate gray */
+    --text-primary: #1e293b; /* Deep slate for text */
+    --text-secondary: #475569;
+    --accent-color: #3b82f6; /* Subtle blue accent */
+    --card-bg: rgba(255, 255, 255, 0.7); /* Standard frosted glass */
+    --card-border: rgba(255, 255, 255, 0.8);
+    --shadow-color: rgba(0, 0, 0, 0.05);
 }
 
 body, html {
@@ -11,67 +14,144 @@ body, html {
     padding: 0;
     height: 100%;
     font-family: 'Outfit', sans-serif;
-    background: linear-gradient(135deg, var(--bg-color-1), var(--bg-color-2));
+    background: linear-gradient(135deg, var(--bg-color-1) 0%, var(--bg-color-2) 100%);
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
 }
 
+/* Decorative background elements to add 'premium' feel */
+body::before, body::after {
+    content: '';
+    position: absolute;
+    width: 40vw;
+    height: 40vw;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+    opacity: 0.4;
+}
+
+body::before {
+    top: -10%;
+    left: -10%;
+    background: radial-gradient(circle, #dcfce7 0%, transparent 70%); /* Soft light green tint */
+}
+
+body::after {
+    bottom: -10%;
+    right: -10%;
+    background: radial-gradient(circle, #dbeafe 0%, transparent 70%); /* Soft light blue tint */
+}
+
 .container {
-    padding: 4rem 6rem;
+    padding: 3rem 5rem;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
-    border-radius: 32px;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(59, 130, 246, 0.1);
+    border-radius: 40px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 
+        0 20px 25px -5px var(--shadow-color),
+        0 10px 10px -5px var(--shadow-color),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.5);
     opacity: 0;
-    animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
-    cursor: default;
+    animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
 
 .container:hover {
-    transform: scale(1.05);
-    box-shadow: 0 35px 60px -15px rgba(59, 130, 246, 0.4), inset 0 0 30px rgba(59, 130, 246, 0.2);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 30px 40px -10px rgba(0, 0, 0, 0.08);
 }
 
 .idea-text {
     margin: 0;
-    font-size: 7rem; /* Make the font size huge */
-    font-weight: 700;
-    color: transparent;
-    /* Blue gradient */
-    background-image: linear-gradient(to right, #60a5fa, #3b82f6, #38bdf8);
-    background-clip: text;
-    -webkit-background-clip: text;
-    background-size: 200% auto;
+    font-size: 48px; /* Slightly larger for impact */
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
     text-align: center;
-    filter: drop-shadow(0px 0px 20px var(--text-glow));
-    animation: textShine 4s linear infinite, float 6s ease-in-out infinite;
+    position: relative;
+    /* Sophisticated dark gradient */
+    background: linear-gradient(to bottom, #1e293b 0%, #334155 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Adding a subtle sub-text for that 'finished' look */
+.sub-text {
+    font-size: 16px;
+    color: var(--text-secondary);
+    font-weight: 400;
+    opacity: 0.8;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
 }
 
 /* Animations */
 @keyframes fadeUp {
     from {
-        transform: translateY(40px);
+        transform: translateY(30px) scale(0.95);
         opacity: 0;
     }
     to {
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
         opacity: 1;
     }
 }
 
 @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
 }
 
-@keyframes textShine {
-    to {
-        background-position: 200% center;
-    }
+.action-button {
+    margin-top: 1rem;
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    outline: none;
+}
+
+.action-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 20px -5px rgba(37, 99, 235, 0.4);
+    filter: brightness(1.1);
+}
+
+.action-button:active {
+    transform: translateY(0);
+    filter: brightness(0.9);
+}
+
+/* Color variations */
+.action-button.yellow {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+    box-shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.3) !important;
+}
+
+.action-button.orange {
+    background: linear-gradient(135deg, #fb923c 0%, #ea580c 100%) !important;
+    box-shadow: 0 10px 15px -3px rgba(234, 88, 12, 0.3) !important;
+}
+
+.action-button.green {
+    background: linear-gradient(135deg, #4ade80 0%, #16a34a 100%) !important;
+    box-shadow: 0 10px 15px -3px rgba(22, 163, 74, 0.3) !important;
 }

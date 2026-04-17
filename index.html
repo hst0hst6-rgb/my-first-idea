@@ -1,15 +1,55 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>내 첫번째 아이디어</title>
-    <link rel="stylesheet" href="index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <title>응원의 한마디</title>
+    <link rel="stylesheet" href="index.css?v=4">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="container">
-        <h1 class="idea-text">내 첫번째 아이디어</h1>
+        <span class="sub-text">Positive Vibes</span>
+        <h1 class="idea-text">오늘도 힘내세요</h1>
+        <button class="action-button">다음 문장 보기</button>
     </div>
+    <script>
+        const sentences = [
+            '오늘도 힘내세요',
+            '오늘도 해냈어요!',
+            '조금씩 나아지고 있어요',
+            '이대로 계속 가봅시다.'
+        ];
+        let currentIndex = 0;
+
+        const ideaText = document.querySelector('.idea-text');
+        const actionButton = document.querySelector('.action-button');
+
+        actionButton.addEventListener('click', function () {
+            currentIndex = (currentIndex + 1) % sentences.length;
+
+            // Remove existing color classes
+            this.classList.remove('yellow', 'orange', 'green');
+
+            // Add new color class based on index
+            if (currentIndex === 1) this.classList.add('yellow');
+            else if (currentIndex === 2) this.classList.add('orange');
+            else if (currentIndex === 3) this.classList.add('green');
+
+            // Add a small fade effect for text
+            ideaText.style.opacity = '0';
+
+            setTimeout(() => {
+                ideaText.textContent = sentences[currentIndex];
+                ideaText.style.opacity = '1';
+            }, 200);
+        });
+
+        // Initialize with smooth transition support
+        ideaText.style.transition = 'opacity 0.2s ease';
+    </script>
 </body>
+
 </html>
